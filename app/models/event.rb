@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
-  attr_accessor :starts_at, :ends_at
   def self.availabilities(start_date)
     weekdays = get_week(start_date)
     weekdays.each do |day|
-      # puts day
       day[:slots] = Event.available_slots(day[:date])
     end
     weekdays
   end
-
-  private
 
   def self.get_week(start_date)
     week = []
@@ -28,9 +24,9 @@ class Event < ApplicationRecord
       ev.starts_at.to_date == day.to_date ||
         ev.weekly_recurring == true && ev.starts_at.wday == day.wday
     end
-    # open.map do |ev| ev.starts_at = DateTime.parse("#{day.to_s} #{ev.}  ")
-    #   ev.ends_at =
-
+    open.map do |ev|
+      Event.new(starts_at: DateTime.parse((ev.starts_at + (day - ev.starts_at.to_date).days).to_s), ends_at: DateTime.parse((ev.ends_at + (day - ev.ends_at.to_date).days).to_s))
+    end
   end
 
   def self.appointments(day)
@@ -38,7 +34,6 @@ class Event < ApplicationRecord
       ev.starts_at.to_date == day.to_date
     end
   end
-
 
   def self.available_slots(day)
     slots = []
