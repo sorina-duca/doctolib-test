@@ -27,4 +27,3 @@ class EventTest < ActiveSupport::TestCase
   end
 end
 
-# [{"date":"2014/08/04","slots":["12:00","13:30"]},{"date":"2014/08/05","slots":["09:00", "09:30"]},
