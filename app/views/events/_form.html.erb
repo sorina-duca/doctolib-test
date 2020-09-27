@@ -1,0 +1,10 @@
+
+<div class="search-bar-index mt-3 d-flex justify-content-center" >
+    <%= form_tag availabilities_path, method: :get do %>
+      <span class="input" style="position: relative;left: 15px;">
+        <%= date_field_tag :day, params[:day], class: "form-control d-inline w-auto border-radius-search", placeholder: "start day"  %>
+      </span>
+      <span class="input" style="position: relative;left: -5px; bottom: 1px;"><%= submit_tag "Search", class: "btn btn-primary border-radius-search-btn" %>
+      </span>
+    <% end %>
+</div>

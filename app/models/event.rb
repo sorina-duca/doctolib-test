@@ -13,7 +13,7 @@ class Event < ApplicationRecord
     week = []
     (0..6).each do |n|
       day = {}
-      day[:date] = (start_date + n.days).to_date
+      day[:date] = (start_date + n.days).strftime("%Y/%m/%d")
       week << day
     end
     week
@@ -22,10 +22,10 @@ class Event < ApplicationRecord
   def self.openings(day)
     open = Event.where(kind: 'opening').select do |ev|
       ev.starts_at.to_date == day.to_date ||
-        ev.weekly_recurring == true && ev.starts_at.wday == day.wday
+        ev.weekly_recurring == true && ev.starts_at.wday == DateTime.parse(day).wday
     end
     open.map do |ev|
-      Event.new(starts_at: DateTime.parse((ev.starts_at + (day - ev.starts_at.to_date).days).to_s), ends_at: DateTime.parse((ev.ends_at + (day - ev.ends_at.to_date).days).to_s))
+      Event.new(starts_at: DateTime.parse((ev.starts_at + (DateTime.parse(day) - ev.starts_at.to_date).days).to_s), ends_at: DateTime.parse((ev.ends_at + (DateTime.parse(day) - ev.ends_at.to_date).days).to_s))
     end
   end
 

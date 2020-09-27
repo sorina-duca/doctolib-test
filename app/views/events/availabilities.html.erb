@@ -1,0 +1,7 @@
+<div class="container">
+  <h1>Availabilities for <%= @day.strftime("%Y/%m/%d") %></h1>
+  <% @availabilities.each do |day| %>
+    <h4> Day: <%= day[:date] %>  </h4>
+    <h4> Slots: <%= day[:slots] %>  </h4>
+  <% end %>
+</div>
