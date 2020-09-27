@@ -26,4 +26,3 @@ class EventTest < ActiveSupport::TestCase
     assert_equal 7, availabilities.length
   end
 end
-

@@ -1,11 +1,10 @@
-class EventsController < ApplicationController
+# frozen_string_literal: true
 
-  def check
-  end
+class EventsController < ApplicationController
+  def check; end
 
   def availabilities
     @day = DateTime.parse(params[:day])
     @availabilities = Event.availabilities(@day)
   end
-
 end

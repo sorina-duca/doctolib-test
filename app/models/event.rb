@@ -13,7 +13,7 @@ class Event < ApplicationRecord
     week = []
     (0..6).each do |n|
       day = {}
-      day[:date] = (start_date + n.days).strftime("%Y/%m/%d")
+      day[:date] = (start_date + n.days).strftime('%Y/%m/%d')
       week << day
     end
     week
@@ -40,7 +40,7 @@ class Event < ApplicationRecord
     if Event.appointments(day) == []
       Event.openings(day).each do |op|
         slots << Event.slot_to_string(op.starts_at)
-        for n in 1..(Event.minutes(op) / 30 - 1) do
+        (1..(Event.minutes(op) / 30 - 1)).each do |n|
           slots << Event.slot_to_string(op.starts_at + n * 30.minutes)
         end
       end
@@ -70,6 +70,6 @@ class Event < ApplicationRecord
   end
 
   def self.slot_to_string(datetime)
-    datetime.strftime("%-l:%M")
+    datetime.strftime('%-l:%M')
   end
 end
